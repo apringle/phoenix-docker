@@ -27,11 +27,13 @@ ENV PATH $PATH:/elixir/bin
 ENV PHOENIX_VERSION 1.1.4
 
 # install Phoenix from source with some previous requirements
-RUN git clone https://github.com/phoenixframework/phoenix.git \
- && cd phoenix && git checkout v$PHOENIX_VERSION \
- && mix local.hex --force && mix local.rebar --force \
- && mix do deps.get, compile \
- && mix archive.install https://github.com/phoenixframework/phoenix/releases/download/v$PHOENIX_VERSION/phoenix_new-$PHOENIX_VERSION.ez --force
+RUN git clone https://github.com/phoenixframework/phoenix.git
+WORKDIR /phoenix
+RUN git checkout v$PHOENIX_VERSION
+RUN mix local.hex --force && mix local.rebar --force \
+ && mix do deps.get, compile
+RUN cd installer && MIX_ENV=prod mix archive.build \
+ && mix archive.install --force && cd ..
 
 # install Node.js and NPM in order to satisfy brunch.io dependencies
 # the snippet below is borrowed from the official nodejs Dockerfile
