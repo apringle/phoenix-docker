@@ -24,7 +24,7 @@ ENV ELIXIR_VERSION 1.2.1
 RUN git clone https://github.com/elixir-lang/elixir.git && cd elixir && git checkout v$ELIXIR_VERSION && make
 ENV PATH $PATH:/elixir/bin
 
-ENV PHOENIX_VERSION 1.1.3
+ENV PHOENIX_VERSION 1.1.4
 
 # install Phoenix from source with some previous requirements
 RUN git clone https://github.com/phoenixframework/phoenix.git \
