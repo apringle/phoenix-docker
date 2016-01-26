@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-MAINTAINER Marcelo Gonçalves <marcelocg@gmail.com>
+MAINTAINER Alex Pringle <alex@alexpringle.co.uk>
 
 # Elixir requires UTF-8
 RUN locale-gen en_US.UTF-8
