@@ -67,3 +67,11 @@ RUN curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x
  && npm cache clear
 
 WORKDIR /code
+
+ONBUILD COPY . /code
+ONBUILD RUN deps.get
+ONBUILD RUN npm install
+ONBUILD RUN mix ecto.create
+ONBUILD RUN ecto.migrate
+
+CMD ["mix","phoenix.server"]
