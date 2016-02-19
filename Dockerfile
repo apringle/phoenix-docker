@@ -68,9 +68,10 @@ RUN curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x
 
 WORKDIR /code
 
+ONBUILD COPY package.json /code
+ONBUILD RUN npm install
 ONBUILD COPY . /code
 ONBUILD RUN mix deps.get
-ONBUILD RUN npm install
 ONBUILD RUN mix ecto.create
 ONBUILD RUN mix ecto.migrate
 
