@@ -75,7 +75,3 @@ ONBUILD COPY package.json /code
 ONBUILD COPY . /code
 ONBUILD RUN mix deps.get
 ONBUILD RUN npm install
-ONBUILD RUN mix ecto.create
-ONBUILD RUN mix ecto.migrate
-
-CMD ["mix","phoenix.server"]
