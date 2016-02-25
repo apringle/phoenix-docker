@@ -16,6 +16,9 @@ RUN wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb \
  && dpkg -i erlang-solutions_1.0_all.deb \
  && apt-get update
 
+# install psql
+RUN  sudo apt-get -yqq install postgresql-client
+
 # install erlang from package
 RUN apt-get install -y erlang erlang-ssl erlang-inets && rm erlang-solutions_1.0_all.deb
 
@@ -69,10 +72,6 @@ RUN curl -SLO "http://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x
 WORKDIR /code
 
 ONBUILD COPY package.json /code
-ONBUILD RUN npm install
 ONBUILD COPY . /code
 ONBUILD RUN mix deps.get
-ONBUILD RUN mix ecto.create
-ONBUILD RUN mix ecto.migrate
-
-CMD ["mix","phoenix.server"]
+ONBUILD RUN npm install
